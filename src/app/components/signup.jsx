@@ -24,7 +24,7 @@ function Signup() {
             alert(data.message);
             router.push('/');
         }catch(err){
-            alert(err.message);
+            alert(err.response?.data?.message || 'An error occurred');
         }
         
     }

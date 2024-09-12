@@ -22,7 +22,7 @@ function Login(props) {
             alert(message);
             router.push(`/${user.id}`);
         } catch (error) {
-            alert(error.message);
+            alert(error.response?.data?.message || 'An error occurred');
         }
     }
 
