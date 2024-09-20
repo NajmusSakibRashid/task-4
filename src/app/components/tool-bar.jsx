@@ -16,7 +16,7 @@ export default ({ selected, setTableData }) => {
       } = await axios.put(`/api/${params.userId}`, { status, selected });
       setTableData((prev) => {
         return prev.map((item) => {
-          if (selected[item.id] || selected[-1]) {
+          if (selected[item.id]) {
             return { ...item, status };
           }
           return item;
@@ -34,11 +34,9 @@ export default ({ selected, setTableData }) => {
       const {
         data: { message },
       } = await axios.delete(`/api/${params.userId}`, { data: selected });
-      if (selected[-1]) setTableData([]);
-      else
-        setTableData((prev) => {
-          return prev.filter((item) => !selected[item.id]);
-        });
+      setTableData((prev) => {
+        return prev.filter((item) => !selected[item.id]);
+      });
       alert(message);
     } catch (err) {
       alert(err.response?.data?.message || "An error occurred");
