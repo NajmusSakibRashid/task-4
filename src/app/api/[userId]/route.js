@@ -44,16 +44,14 @@ export async function DELETE(request, { params }) {
       throw new Error("Unauthorized");
     }
     // console.log('we are here')
-    const pool = await getConnection();
-    const { rows } = await pool.request().query(`select * from users`);
+    const { rows } = await sql`select * from users`;
     for (let record of rows) {
       if (selected[record.id]) {
-        await pool.request().query(`delete from users where id=${record.id}`);
+        await sql`delete from users where id=${record.id}`;
       }
     }
-    const { rows: db_user } = await pool
-      .request()
-      .query(`select * from users where id=${params.userId}`);
+    const { rows: db_user } =
+      await sql`select * from users where id=${params.userId}`;
     if (!db_user[0] || db_user[0].status == 0) {
       throw new Error("You have deleted yourself");
     }
