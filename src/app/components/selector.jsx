@@ -11,7 +11,7 @@ export default ({ id, setSelected, selected }) => {
       setSelected((selected) => {
         let newSelected = { ...selected };
         for (let key in newSelected) {
-          newSelected[key] = true;
+          newSelected[key] = !selected[id];
         }
         console.log(newSelected);
         return newSelected;
