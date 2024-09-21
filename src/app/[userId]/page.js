@@ -20,7 +20,7 @@ const Page = async ({ params: { userId } }) => {
       redirect("/");
     }
   }
-  const { rows } = await sql`select * from users`;
+  const { rows } = await sql`select * from users order by id`;
   // console.log(rows)
   return (
     <div className="fixed flex inset-0 justify-start md:justify-center items-start overflow-auto mt-20">

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export default ({ id, setSelected }) => {
+export default ({ id, setSelected, selected }) => {
   useEffect(() => {
     setSelected((selected) => ({ ...selected, [id]: false }));
   }, []);
@@ -22,18 +22,17 @@ export default ({ id, setSelected }) => {
       //   });
       return;
     }
-    setSelected((selected) => ({ ...selected, [id]: !selected[id] }));
+    setSelected((selected) => ({
+      ...selected,
+      [id]: !selected[id],
+      [-1]: false,
+    }));
     // setSelected((selected) => {
     //   console.log(selected);
     //   return selected;
     // });
   };
   return (
-    <button
-      className="p-2 bg-green-300 w-full active:bg-green-600 hover:bg-green-400 rounded-lg"
-      onClick={handler}
-    >
-      {id === -1 ? "Select All" : "Select/Deselect"}
-    </button>
+    <input type="checkbox" checked={selected[id] || false} onChange={handler} />
   );
 };
